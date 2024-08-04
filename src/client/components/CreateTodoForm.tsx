@@ -34,9 +34,18 @@ export const CreateTodoForm = () => {
         apiContext.todo.getAll.refetch()
       },
     })
-
+  const sumbmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    createTodo({
+      body: todoBody,
+    })
+    setTodoBody('')
+  }
   return (
-    <form className="group flex items-center justify-between rounded-12 border border-gray-200 py-2 pr-4 focus-within:border-gray-400">
+    <form
+      onSubmit={sumbmitForm}
+      className="group flex items-center justify-between rounded-12 border border-gray-200 py-2 pr-4 focus-within:border-gray-400"
+    >
       <label htmlFor={TODO_INPUT_ID} className="sr-only">
         Add todo
       </label>
@@ -51,7 +60,6 @@ export const CreateTodoForm = () => {
         }}
         className="flex-1 px-4 text-base placeholder:text-gray-400 focus:outline-none"
       />
-
       <button
         type="button"
         disabled={isCreatingTodo}
@@ -61,6 +69,7 @@ export const CreateTodoForm = () => {
           })
           setTodoBody('')
         }}
+        className="h-[36px] w-[67px] rounded-full  bg-gray-700 px-5 py-2 text-sm font-bold text-white"
       >
         Add
       </button>
